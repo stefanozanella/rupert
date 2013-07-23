@@ -6,14 +6,20 @@ end
 
 desc "Run all test suites"
 task :test do
-    Rake::Task['test:end_to_end'].invoke
+  Rake.application.in_namespace(:test) do |ns|
+    ns.tasks.each do |task|
+      task.invoke
+    end
+  end
 end
 
 namespace :test do
-  Rake::TestTask.new(:end_to_end) do |t|
-    t.verbose = true
-    t.libs << 'lib'
-    t.libs << 'test'
-    t.test_files = FileList['test/end_to_end/**/*_test.rb']
+  %w{end_to_end unit}.each do |suite|
+    Rake::TestTask.new(suite.to_sym) do |t|
+      t.verbose = true
+      t.libs << 'lib'
+      t.libs << 'test'
+      t.test_files = FileList["test/#{suite}/**/*_test.rb"]
+    end
   end
 end

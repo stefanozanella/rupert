@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can read an RPM simply with:
+
+    rpm = Rupture::RPM.load('rpm-4.8.0-32.el6.x86_64.rpm')
+
+or just check if a specific file is an RPM with:
+
+    Rupture::RPM.rpm? 'iamtrollingyou' # false
+
+(note that loading a file that is not an RPM generates an exception)
 
 ## Contributing
 
