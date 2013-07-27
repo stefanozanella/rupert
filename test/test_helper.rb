@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'minitest/spec'
 require 'minitest-spec-context'
+require 'mocha/setup'
 
 require 'rupture'
 require 'rupture/errors'
@@ -30,12 +31,32 @@ def null(length)
   pad("", length)
 end
 
+# Returns 128-bit MD5 checksum of given string
+def md5(str)
+  Digest::MD5.digest(str)
+end
+
+# Transforms given string into an IO object.
+def io(string)
+  StringIO.new(string)
+end
+
 # Helpers that builds a lead header from a plain string. Use it to make tests
 # more readable.
 def lead_from(string)
-  Rupture::RPM::Lead.new(StringIO.new(string))
+  Rupture::RPM::Lead.new(io(string))
 end
 
 def lead_with(string)
   lead_from(string)
+end
+
+# Helpers that builds a signature header from a plain string. Use it to make tests
+# more readable.
+def signature_from(string)
+  Rupture::RPM::Signature.new(io(string))
+end
+
+def signature_with(string)
+  signature_from(string)
 end

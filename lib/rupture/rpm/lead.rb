@@ -25,6 +25,23 @@ module Rupture
       # Only valid and recognized signature type
       SIGNATURE_TYPE_HEADER = 5.freeze
 
+      # Chomps given IO, producing a `Lead` object and returning the remaining
+      # part for subsequent processing.
+      #
+      # Lead data is expected to begin at IO start, so returned scrap is
+      # basically the input IO without its first
+      # `Rupture::RPM::Lead::LEAD_LENGTH` bytes.
+      #
+      # @param io [IO] IO object containing lead data at its start, possibly
+      #           with additional bytes at the end 
+      #
+      # @return [Rupture::RPM::Lead, IO] the lead object corresponding to the
+      #         data at the beginning of the IO, and the part of the input remaining
+      #         after parsing.
+      def self.chomp(io)
+        [ self.new(io), io ]
+      end
+
       # Initializes a lead section, parsing given IO
       #
       # @param lead [IO] An IO containing the lead information at the start
@@ -104,7 +121,7 @@ module Rupture
       # implementation but it isn't intended to be actually used
       #
       # @return [String] the raw 16 bytes long reserved string at the end of
-      #                  the lead
+      #         the lead
       def reserved
         @reserved
       end
@@ -119,7 +136,7 @@ module Rupture
       # Unpacks lead raw bytes into its semantic components
       def parse(lead_data)
         @magic, @rpm_major, @rpm_minor, @type, @archnum, @name, @osnum,
-            @signature_type, @reserved = lead_data.unpack(LEAD_FORMAT) if lead_data
+            @signature_type, @reserved = lead_data.unpack(LEAD_FORMAT)
       end
     end
   end

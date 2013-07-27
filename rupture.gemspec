@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest", "~> 5"
   spec.add_development_dependency "minitest-spec-context"
+  spec.add_development_dependency "mocha", "~> 0"
 
   spec.description = %s{
     Rupture allows to manipulate RPM files independently from availability of rpmlib.

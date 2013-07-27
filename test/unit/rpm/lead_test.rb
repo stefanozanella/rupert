@@ -21,6 +21,7 @@ describe Rupture::RPM::Lead do
     let(:signature_type_header)   { "#{os}#{sig_type_header_raw}" }
     let(:unknown_signature_type)  { "#{os}#{unknown_sig_type_raw}" }
     let(:reserved_bits)           { "#{signature_type_header}#{reserved_string_raw}" }
+    let(:additional_content)      { "#{reserved_bits}this_is_not_part_of_the_lead" }
   
     it "parses RPM major and minor version numbers" do
       lead_with(rpm_version).rpm_version_major.must_equal 2
@@ -68,6 +69,14 @@ describe Rupture::RPM::Lead do
 
     it "exposes the reserved bits at the end of the lead" do
       lead_with(reserved_bits).reserved.length.must_equal 16
+    end
+
+    it "can parse an incoming IO returning itself and the remaining part for
+        subsequent elaboration" do
+      lead, scrap = Rupture::RPM::Lead.chomp(io(additional_content))
+
+      lead.must_be_instance_of Rupture::RPM::Lead
+      scrap.read.must_equal "this_is_not_part_of_the_lead"
     end
   end
 

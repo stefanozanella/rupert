@@ -1,5 +1,9 @@
 require 'rupture/errors'
+require 'rupture/parser'
 require 'rupture/rpm/lead'
+require 'rupture/rpm/signature'
+
+require 'base64'
 
 module Rupture
   class RPM
@@ -12,7 +16,11 @@ module Rupture
         raise NotAnRPM, 
           "File #{filename} isn't a valid RPM" unless rpm?(filename)
 
-        return self.new(File.open(filename, 'r'))
+        raw_io = File.open(filename, 'r')
+        rpm = Parser.new(raw_io).parse
+        raw_io.close
+
+        return rpm
       end
 
       # Tells whether given filename points to a valid RPM or not.
@@ -24,11 +32,19 @@ module Rupture
       end
     end
 
-    # Parses an RPM file, given as an IO ojbect
+    # Initialize the RPM object, given its components.
     #
-    # @param io [IO] The IO stream containing the RPM package
-    def initialize(io)
-      @lead = Lead.new(io)
+    # This method is not intended to be used to instantiate RPM objects
+    # directly. Instead, use Rupture::RPM::load for a more straightforward
+    # alternative.
+    #
+    # @param lead [Rupture::RPM::Lead] RPM lead section
+    # @param signature [Rupture::RPM::Signature] RPM signature section
+    # @param content [String] Raw content found after the signature structure
+    def initialize(lead, signature, content)
+      @lead = lead
+      @signature = signature
+      @content = content
     end
 
     # RPM version used to encode the package.
@@ -49,7 +65,7 @@ module Rupture
     end
 
     # Which architecture the package was built for, e.g. `i386/x86_64` or
-    # `mips`
+    # `arm`
     #
     # @return [String] package architecture name
     def rpm_arch
@@ -66,7 +82,7 @@ module Rupture
     # OS for which the package was built
     #
     # @return [String] as defined in /usr/lib/rpm/rpmrc under the canonical OS
-    #                  names section
+    #         names section
     def os
       @lead.os
     end
@@ -74,6 +90,29 @@ module Rupture
     # @return `true` if the package is signed, `false` otherwise
     def signed?
       @lead.signed?
+    end
+
+    # MD5 checksum stored in the package (base64 encoded). To be used to check
+    # package integrity.
+    #
+    # NOTE: This is not the MD5 of the whole package; rather, the digest is
+    # calculated over the header and payload, leaving out the lead and the
+    # signature header. I.e., running `md5sum <myrpm>` won't held the same
+    # result as `Rupture::RPM.load('<myrpm>').md5`.
+    #
+    # @return [String] Base64-encoded MD5 checksum of package's header and
+    #         payload, stored in the RPM itself
+    def md5
+      Base64.strict_encode64(@signature.md5)
+    end
+
+    # Verifies package integrity. Compares MD5 checksum stored in the package
+    # with checksum calculated over header(s) and payload (archive).
+    #
+    # @return `true` if package is intact, `false` if package (either stored MD5 or
+    # payload) is corrupted
+    def intact?
+      @signature.verify_checksum(@content)      
     end
   end
 end
