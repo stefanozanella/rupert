@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/stefanozanella/rupture.png?branch=master)](https://travis-ci.org/stefanozanella/rupture)
 [![Code Climate](https://codeclimate.com/github/stefanozanella/rupture.png)](https://codeclimate.com/github/stefanozanella/rupture)
+[![Coverage Status](https://coveralls.io/repos/stefanozanella/rupture/badge.png?branch=master)](https://coveralls.io/r/stefanozanella/rupture?branch=master)
+[![Dependency Status](https://gemnasium.com/stefanozanella/rupture.png)](https://gemnasium.com/stefanozanella/rupture)
 
 # Rupture
 
