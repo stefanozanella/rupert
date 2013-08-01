@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stefanozanella/rupture.png?branch=master)](https://travis-ci.org/stefanozanella/rupture)
+
 # Rupture
 
 Pure Ruby RPM Library
