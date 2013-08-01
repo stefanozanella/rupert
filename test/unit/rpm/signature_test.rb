@@ -1,9 +1,9 @@
 require 'test_helper'
 
-describe Rupture::RPM::Signature do
-  let(:md5_signature_tag) { Rupture::RPM::Signature::MD5_TAG }
+describe Rupert::RPM::Signature do
+  let(:md5_signature_tag) { Rupert::RPM::Signature::MD5_TAG }
   let(:index)             { mock }
-  let(:signature)         { Rupture::RPM::Signature.new(index) }
+  let(:signature)         { Rupert::RPM::Signature.new(index) }
   let(:pristine_content)  { ascii("\x01\x02\x03\x04") }
   let(:corrupted_content) { ascii("\xf4\x04\x57\x1e") }
 

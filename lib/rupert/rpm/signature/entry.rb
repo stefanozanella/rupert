@@ -1,4 +1,4 @@
-module Rupture
+module Rupert
   class RPM
     class Signature
       class Entry

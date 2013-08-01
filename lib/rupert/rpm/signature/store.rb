@@ -1,4 +1,4 @@
-module Rupture
+module Rupert
 class RPM
   class Signature
     # Package information is mostly contained in headers. Headers are composed
@@ -22,7 +22,7 @@ class RPM
 
       # Fetches data pointed by given entry.
       #
-      # @param entry [Rupture::RPM::Signature::Entry] entry containing address
+      # @param entry [Rupert::RPM::Signature::Entry] entry containing address
       #              and type of needed information
       # @return [String] binary string containing asked data
       def fetch(entry)

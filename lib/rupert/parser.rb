@@ -1,7 +1,7 @@
-require 'rupture/rpm/lead'
-require 'rupture/rpm/signature'
+require 'rupert/rpm/lead'
+require 'rupert/rpm/signature'
 
-module Rupture
+module Rupert
   class Parser
     def initialize(raw_io)
       @raw_io = raw_io

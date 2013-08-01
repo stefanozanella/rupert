@@ -1,6 +1,6 @@
 require 'test_helper'
 
-describe Rupture::RPM::Lead do
+describe Rupert::RPM::Lead do
   context "when reading a proper RPM" do
     let(:rpm_version_raw)         { ascii("\x02\x01") }
     let(:binary_type_raw)         { ascii("\x00\x00") }
@@ -12,7 +12,7 @@ describe Rupture::RPM::Lead do
     let(:unknown_sig_type_raw)    { ascii("\x03\x03") }
     let(:reserved_string_raw)     { ascii(null(16)) }
 
-    let(:rpm_version)             { "#{Rupture::RPM::Lead::MAGIC}#{rpm_version_raw}" }
+    let(:rpm_version)             { "#{Rupert::RPM::Lead::MAGIC}#{rpm_version_raw}" }
     let(:binary_type)             { "#{rpm_version}#{binary_type_raw}" }
     let(:source_type)             { "#{rpm_version}#{source_type_raw}" }
     let(:arch)                    { "#{binary_type}#{archnum_raw}" }
@@ -73,9 +73,9 @@ describe Rupture::RPM::Lead do
 
     it "can parse an incoming IO returning itself and the remaining part for
         subsequent elaboration" do
-      lead, scrap = Rupture::RPM::Lead.chomp(io(additional_content))
+      lead, scrap = Rupert::RPM::Lead.chomp(io(additional_content))
 
-      lead.must_be_instance_of Rupture::RPM::Lead
+      lead.must_be_instance_of Rupert::RPM::Lead
       scrap.read.must_equal "this_is_not_part_of_the_lead"
     end
   end

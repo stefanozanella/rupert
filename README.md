@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/stefanozanella/rupture/badge.png?branch=master)](https://coveralls.io/r/stefanozanella/rupture?branch=master)
 [![Dependency Status](https://gemnasium.com/stefanozanella/rupture.png)](https://gemnasium.com/stefanozanella/rupture)
 
-# Rupture
+# Rupert
 
 Pure Ruby RPM Library
 
@@ -11,7 +11,7 @@ Pure Ruby RPM Library
 
 Add this line to your application's Gemfile:
 
-    gem 'rupture'
+    gem 'rupert'
 
 And then execute:
 
@@ -19,17 +19,17 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rupture
+    $ gem install rupert
 
 ## Usage
 
 You can read an RPM simply with:
 
-    rpm = Rupture::RPM.load('rpm-4.8.0-32.el6.x86_64.rpm')
+    rpm = Rupert::RPM.load('rpm-4.8.0-32.el6.x86_64.rpm')
 
 or just check if a specific file is an RPM with:
 
-    Rupture::RPM.rpm? 'iamtrollingyou' # false
+    Rupert::RPM.rpm? 'iamtrollingyou' # false
 
 (note that loading a file that is not an RPM generates an exception)
 

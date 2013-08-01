@@ -1,23 +1,23 @@
 require 'test_helper'
 
-describe Rupture::RPM do
+describe Rupert::RPM do
   let(:valid_rpm)   { fixture('rpm-4.8.0-32.el6.x86_64.rpm') }
   let(:invalid_rpm) { fixture('notanrpm-0.0.1-1.el6.noarch.rpm') }
   let(:bin_rpm)     { fixture('rpm-4.8.0-32.el6.x86_64.rpm') }
   let(:src_rpm)     { fixture('redhat-lsb-4.0-7.el6.centos.src.rpm') }
 
-  let(:rpm)         { Rupture::RPM.load(valid_rpm) }
-  let(:binary_rpm)  { Rupture::RPM.load(bin_rpm) }
-  let(:source_rpm)  { Rupture::RPM.load(src_rpm) }
+  let(:rpm)         { Rupert::RPM.load(valid_rpm) }
+  let(:binary_rpm)  { Rupert::RPM.load(bin_rpm) }
+  let(:source_rpm)  { Rupert::RPM.load(src_rpm) }
 
   it "correctly loads a valid RPM" do
-    Rupture::RPM.load(valid_rpm)
+    Rupert::RPM.load(valid_rpm)
   end
 
   it "raises an error if the RPM is not in valid format" do
     proc {
-      Rupture::RPM.load(invalid_rpm)
-    }.must_raise Rupture::NotAnRPM
+      Rupert::RPM.load(invalid_rpm)
+    }.must_raise Rupert::NotAnRPM
   end
 
   it "knows which version of RPM the file is" do

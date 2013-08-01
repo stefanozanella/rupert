@@ -7,8 +7,8 @@ require 'minitest/spec'
 require 'minitest-spec-context'
 require 'mocha/setup'
 
-require 'rupture'
-require 'rupture/errors'
+require 'rupert'
+require 'rupert/errors'
 
 # Returns the absolute path for the given fixture filename, or the path of
 # fixture directory if no argument present.
@@ -47,7 +47,7 @@ end
 # Helpers that builds a lead header from a plain string. Use it to make tests
 # more readable.
 def lead_from(string)
-  Rupture::RPM::Lead.new(io(string))
+  Rupert::RPM::Lead.new(io(string))
 end
 
 def lead_with(string)
@@ -57,7 +57,7 @@ end
 # Helpers that builds a signature header from a plain string. Use it to make tests
 # more readable.
 def signature_from(string)
-  Rupture::RPM::Signature.new(io(string))
+  Rupert::RPM::Signature.new(io(string))
 end
 
 def signature_with(string)

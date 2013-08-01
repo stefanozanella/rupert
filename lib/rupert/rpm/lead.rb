@@ -1,4 +1,4 @@
-module Rupture
+module Rupert
   class RPM
     class Lead
       # Lead has a fixed length
@@ -30,12 +30,12 @@ module Rupture
       #
       # Lead data is expected to begin at IO start, so returned scrap is
       # basically the input IO without its first
-      # `Rupture::RPM::Lead::LEAD_LENGTH` bytes.
+      # `Rupert::RPM::Lead::LEAD_LENGTH` bytes.
       #
       # @param io [IO] IO object containing lead data at its start, possibly
       #           with additional bytes at the end 
       #
-      # @return [Rupture::RPM::Lead, IO] the lead object corresponding to the
+      # @return [Rupert::RPM::Lead, IO] the lead object corresponding to the
       #         data at the beginning of the IO, and the part of the input remaining
       #         after parsing.
       def self.chomp(io)

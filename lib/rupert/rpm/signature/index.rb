@@ -1,7 +1,7 @@
-require 'rupture/rpm/signature/entry'
-require 'rupture/rpm/signature/store'
+require 'rupert/rpm/signature/entry'
+require 'rupert/rpm/signature/store'
 
-module Rupture
+module Rupert
   class RPM
     class Signature
       class Index
@@ -9,8 +9,8 @@ module Rupture
         # store containing actual data.
         #
         # @param entries [Hash] a map of
-        #                Rupture::RPM::Signature::Entry, indexed by tag
-        # @param store [Rupture::RPM::Signature::Store] store containing
+        #                Rupert::RPM::Signature::Entry, indexed by tag
+        # @param store [Rupert::RPM::Signature::Store] store containing
         #              data pointed by entries
         def initialize(entries, store)
           @entries = entries

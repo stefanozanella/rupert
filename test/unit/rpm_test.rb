@@ -1,8 +1,8 @@
 require 'test_helper'
 
-describe Rupture::RPM do
+describe Rupert::RPM do
   let(:signature)      { mock }
-  let(:rpm)            { Rupture::RPM.new(nil, signature, signed_content) }
+  let(:rpm)            { Rupert::RPM.new(nil, signature, signed_content) }
   let(:signed_content) { ascii("\x01\x02\x03\x04") }
 
   it "exposes the MD5 digest held by the signature" do

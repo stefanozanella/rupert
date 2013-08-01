@@ -1,10 +1,10 @@
 # coding: utf-8
 $:.unshift('lib') unless $:.include?('lib')
-require 'rupture/version'
+require 'rupert/version'
 
 Gem::Specification.new do |spec|
-  spec.name             = "rupture"
-  spec.version          = Rupture::VERSION
+  spec.name             = "rupert"
+  spec.version          = Rupert::VERSION
   spec.authors          = ["Stefano Zanella"]
   spec.email            = ["zanella.stefano@gmail.com"]
   spec.summary          = %q{Pure Ruby RPM Library}
@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "flay"
 
   spec.description = %s{
-    Rupture allows to manipulate RPM files independently from availability of rpmlib.
+    Rupert allows to manipulate RPM files independently from availability of rpmlib.
   }
 end

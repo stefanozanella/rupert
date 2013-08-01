@@ -1,6 +1,6 @@
-require 'rupture/rpm/signature/index'
+require 'rupert/rpm/signature/index'
 
-module Rupture
+module Rupert
   class RPM
     class Signature
       # Tag holding 128-bit MD5 checksum of header and payload
@@ -8,7 +8,7 @@ module Rupture
 
       # Creates a new signature given its components.
       #
-      # @param index [Rupture::RPM::Signature::Index] the signature index
+      # @param index [Rupert::RPM::Signature::Index] the signature index
       #              containing actual signature data
       def initialize(index)
         @index = index

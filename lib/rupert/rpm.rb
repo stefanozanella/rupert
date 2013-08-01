@@ -1,17 +1,17 @@
-require 'rupture/errors'
-require 'rupture/parser'
-require 'rupture/rpm/lead'
-require 'rupture/rpm/signature'
+require 'rupert/errors'
+require 'rupert/parser'
+require 'rupert/rpm/lead'
+require 'rupert/rpm/signature'
 
 require 'base64'
 
-module Rupture
+module Rupert
   class RPM
     class << self
       # Loads a RPM file and parses its structure
       #
       # @param filename [String] filename of the RPM to load
-      # @return [Rupture::RPM] the parsed RPM
+      # @return [Rupert::RPM] the parsed RPM
       def load(filename)
         raise NotAnRPM, 
           "File #{filename} isn't a valid RPM" unless rpm?(filename)
@@ -35,11 +35,11 @@ module Rupture
     # Initialize the RPM object, given its components.
     #
     # This method is not intended to be used to instantiate RPM objects
-    # directly. Instead, use Rupture::RPM::load for a more straightforward
+    # directly. Instead, use Rupert::RPM::load for a more straightforward
     # alternative.
     #
-    # @param lead [Rupture::RPM::Lead] RPM lead section
-    # @param signature [Rupture::RPM::Signature] RPM signature section
+    # @param lead [Rupert::RPM::Lead] RPM lead section
+    # @param signature [Rupert::RPM::Signature] RPM signature section
     # @param content [String] Raw content found after the signature structure
     def initialize(lead, signature, content)
       @lead = lead
@@ -98,7 +98,7 @@ module Rupture
     # NOTE: This is not the MD5 of the whole package; rather, the digest is
     # calculated over the header and payload, leaving out the lead and the
     # signature header. I.e., running `md5sum <myrpm>` won't held the same
-    # result as `Rupture::RPM.load('<myrpm>').md5`.
+    # result as `Rupert::RPM.load('<myrpm>').md5`.
     #
     # @return [String] Base64-encoded MD5 checksum of package's header and
     #         payload, stored in the RPM itself
