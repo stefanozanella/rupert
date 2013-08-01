@@ -22,3 +22,13 @@ namespace :test do
     end
   end
 end
+
+desc "Analyze code duplication"
+task :flay do
+  system "flay lib/*.rb"
+end
+
+desc "Analyze code complexity"
+task :flog do
+  system "find lib -name \*.rb | xargs flog"
+end
