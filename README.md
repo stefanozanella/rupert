@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/stefanozanella/rupture.png?branch=master)](https://travis-ci.org/stefanozanella/rupture)
+[![Code Climate](https://codeclimate.com/github/stefanozanella/rupture.png)](https://codeclimate.com/github/stefanozanella/rupture)
 
 # Rupture
 
