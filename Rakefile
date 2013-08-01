@@ -5,13 +5,11 @@ namespace :gem do
   require "bundler/gem_tasks"
 end
 
-desc "Run all test suites"
-task :test do
-  Rake.application.in_namespace(:test) do |ns|
-    ns.tasks.each do |task|
-      task.invoke
-    end
-  end
+Rake::TestTask.new do |t|
+  t.verbose = true
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.test_files = FileList["test/**/*_test.rb"]
 end
 
 namespace :test do
@@ -23,11 +21,4 @@ namespace :test do
       t.test_files = FileList["test/#{suite}/**/*_test.rb"]
     end
   end
-end
-
-namespace :ci do
-  Coveralls::RakeTask.new
-
-  desc "Run tests in CI environment"
-  task :test => [ 'rake:test', 'coveralls:push' ]
 end
