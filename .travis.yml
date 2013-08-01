@@ -8,4 +8,4 @@ rvm:
 bundler_args: --path vendor/bundle
 
 script:
-  - bundle exec rake ci:test
+  - bundle exec rake test
