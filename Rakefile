@@ -1,4 +1,5 @@
 require 'rake/testtask'
+require 'coveralls/rake/task'
 
 namespace :gem do
   require "bundler/gem_tasks"
@@ -22,4 +23,11 @@ namespace :test do
       t.test_files = FileList["test/#{suite}/**/*_test.rb"]
     end
   end
+end
+
+namespace :ci do
+  Coveralls::RakeTask.new
+
+  desc "Run tests in CI environment"
+  task :test => [ 'rake:test', 'coveralls:push' ]
 end

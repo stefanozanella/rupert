@@ -8,5 +8,4 @@ rvm:
 bundler_args: --path vendor/bundle
 
 script:
-  - bundle exec rake test:unit
-  - bundle exec rake test:end_to_end
+  - bundle exec rake ci:test
