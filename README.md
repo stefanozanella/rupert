@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/rupert.png)](http://badge.fury.io/rb/rupert)
 [![Build Status](https://travis-ci.org/stefanozanella/rupert.png?branch=master)](https://travis-ci.org/stefanozanella/rupert)
 [![Code Climate](https://codeclimate.com/github/stefanozanella/rupert.png)](https://codeclimate.com/github/stefanozanella/rupert)
 [![Coverage Status](https://coveralls.io/repos/stefanozanella/rupert/badge.png?branch=master)](https://coveralls.io/r/stefanozanella/rupert?branch=master)
