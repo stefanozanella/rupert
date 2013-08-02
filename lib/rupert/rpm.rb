@@ -26,7 +26,7 @@ module Rupert
       # Tells whether given filename points to a valid RPM or not.
       #
       # @param filename [String] filename to inspect
-      # @return `true` if file starts with the correct magic header
+      # @return +true+ if file starts with the correct magic header
       def rpm?(filename)
         Lead.new(File.open(filename, 'r')).rpm?
       end
@@ -35,7 +35,7 @@ module Rupert
     # Initialize the RPM object, given its components.
     #
     # This method is not intended to be used to instantiate RPM objects
-    # directly. Instead, use Rupert::RPM::load for a more straightforward
+    # directly. Instead, use {Rupert::RPM.load} for a more straightforward
     # alternative.
     #
     # @param lead [Rupert::RPM::Lead] RPM lead section
@@ -49,23 +49,23 @@ module Rupert
 
     # RPM version used to encode the package.
     #
-    # @return [String] the RPM version in `<major>.<minor>` format
+    # @return [String] the RPM version in +<major>.<minor>+ format
     def rpm_version
       @lead.rpm_version
     end
 
-    # @return `true` if the RPM is of type binary, `false` otherwise
+    # @return +true+ if the RPM is of type binary, +false+ otherwise
     def binary?
       @lead.binary_type?
     end
 
-    # @return `true` if the RPM is of type source, `false` otherwise
+    # @return +true+ if the RPM is of type source, +false+ otherwise
     def source?
       @lead.source_type?
     end
 
-    # Which architecture the package was built for, e.g. `i386/x86_64` or
-    # `arm`
+    # Which architecture the package was built for, e.g. +i386/x86_64+ or
+    # +arm+
     #
     # @return [String] package architecture name
     def rpm_arch
@@ -74,20 +74,20 @@ module Rupert
 
     # Full package name
     #
-    # @return [String] package name in the form <name>-<version>-<rev>.<suffix>
+    # @return [String] package name in the form +<name>-<version>-<rev>.<suffix>+
     def name
       @lead.name
     end
 
     # OS for which the package was built
     #
-    # @return [String] as defined in /usr/lib/rpm/rpmrc under the canonical OS
+    # @return [String] as defined in _/usr/lib/rpm/rpmrc_ under the canonical OS
     #         names section
     def os
       @lead.os
     end
 
-    # @return `true` if the package is signed, `false` otherwise
+    # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?
     end
@@ -95,10 +95,10 @@ module Rupert
     # MD5 checksum stored in the package (base64 encoded). To be used to check
     # package integrity.
     #
-    # NOTE: This is not the MD5 of the whole package; rather, the digest is
+    # *NOTE*: This is not the MD5 of the whole package; rather, the digest is
     # calculated over the header and payload, leaving out the lead and the
-    # signature header. I.e., running `md5sum <myrpm>` won't held the same
-    # result as `Rupert::RPM.load('<myrpm>').md5`.
+    # signature header. I.e., running +md5sum <myrpm>+ won't held the same
+    # result as +Rupert::RPM.load('<myrpm>').md5+.
     #
     # @return [String] Base64-encoded MD5 checksum of package's header and
     #         payload, stored in the RPM itself
@@ -109,7 +109,7 @@ module Rupert
     # Verifies package integrity. Compares MD5 checksum stored in the package
     # with checksum calculated over header(s) and payload (archive).
     #
-    # @return `true` if package is intact, `false` if package (either stored MD5 or
+    # @return +true+ if package is intact, +false+ if package (either stored MD5 or
     # payload) is corrupted
     def intact?
       @signature.verify_checksum(@content)      

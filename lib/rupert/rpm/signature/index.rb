@@ -9,7 +9,7 @@ module Rupert
         # store containing actual data.
         #
         # @param entries [Hash] a map of
-        #                Rupert::RPM::Signature::Entry, indexed by tag
+        #                {Rupert::RPM::Signature::Entry}, indexed by tag
         # @param store [Rupert::RPM::Signature::Store] store containing
         #              data pointed by entries
         def initialize(entries, store)

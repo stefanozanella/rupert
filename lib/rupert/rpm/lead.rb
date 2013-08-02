@@ -5,7 +5,7 @@ module Rupert
       LEAD_LENGTH = 96.freeze # byte
 
       # The magic header that identifies an RPM beyond a shadow of a doubt, as
-      # every good RPM starts with hex `ed ab ee db`.
+      # every good RPM starts with hex +ed ab ee db+.
       MAGIC = "\xed\xab\xee\xdb".force_encoding(Encoding::ASCII_8BIT).freeze
 
       # RPM of type binary
@@ -25,12 +25,12 @@ module Rupert
       # Only valid and recognized signature type
       SIGNATURE_TYPE_HEADER = 5.freeze
 
-      # Chomps given IO, producing a `Lead` object and returning the remaining
+      # Chomps given IO, producing a {Lead} object and returning the remaining
       # part for subsequent processing.
       #
       # Lead data is expected to begin at IO start, so returned scrap is
       # basically the input IO without its first
-      # `Rupert::RPM::Lead::LEAD_LENGTH` bytes.
+      # {Rupert::RPM::Lead::LEAD_LENGTH} bytes.
       #
       # @param io [IO] IO object containing lead data at its start, possibly
       #           with additional bytes at the end 
@@ -73,24 +73,24 @@ module Rupert
 
       # Tells if the file is recognized as an RPM or not
       #
-      # @return `true` if magic number is found at lead's start, `false`
+      # @return +true+ if magic number is found at lead's start, +false+
       #          otherwise
       def rpm?
         @magic == MAGIC
       end
 
-      # @return `true` if lead reports RPM as of binary type
+      # @return +true+ if lead reports RPM as of binary type
       def binary_type?
         @type == TYPE_BINARY
       end
 
-      # @return `true` if lead reports RPM as of source type
+      # @return +true+ if lead reports RPM as of source type
       def source_type?
         @type == TYPE_SOURCE
       end
 
       # The architecture the package was built for. A list of supported
-      # architectures can be found in `/usr/lib/rpm/rpmrc` on RedHat based
+      # architectures can be found in _/usr/lib/rpm/rpmrc_ on RedHat based
       # systems.
       #
       # @return [String] a string representing the architecture name(s)
@@ -107,12 +107,12 @@ module Rupert
 
       # OS for which the package was built
       #
-      # @return [String] OS canonical name as defined in `/usr/lib/rpm/rpmrc`
+      # @return [String] OS canonical name as defined in _/usr/lib/rpm/rpmrc_
       def os
         @@os_map[@osnum]
       end
 
-      # @return `true` if the RPM is recognized as being signed, `false` otherwise
+      # @return +true+ if the RPM is recognized as being signed, +false+ otherwise
       def signed?
         @signature_type == SIGNATURE_TYPE_HEADER
       end
@@ -129,7 +129,7 @@ module Rupert
       private
 
       # :nodoc
-      # The format string passed to `unpack` to parse the lead
+      # The format string passed to +unpack+ to parse the lead
       LEAD_FORMAT = "A4CCnnZ66nna16".freeze
 
       # :nodoc

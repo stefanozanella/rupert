@@ -25,8 +25,8 @@ module Rupert
       # Verifies if stored MD5 checksum corresponds to digest calculated over
       # given content.
       #
-      # @return `true` if stored MD5 checksum corresponds to MD5 calculated
-      #         over given content, `false` otherwise
+      # @return +true+ if stored MD5 checksum corresponds to MD5 calculated
+      #         over given content, +false+ otherwise
       def verify_checksum(content)
         md5 == md5_checksum(content)
       end
