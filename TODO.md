@@ -26,14 +26,19 @@
 * Remember that signature is not mandatory in RPM!
 * It looks like size is also a form of signature, in the sense that RPM uses
   the stored value to check actual size of header + payload (or did I
-  understood wrong?).
+  understood wrong?) -> make integrity + auth verification check everything at
+  once?.
 * I18N ???
+* Improve Index robustness against null values of store and entries, and for
+  missing tags -> decide what to return
 
 # Roadmap
 
-* Pick the entry type table. For each type, pick a meaningful header tag (like
-  name, file list, etc.) to derive a feature to be implemented. At the end, all
-  types should be correctly handled
+* Pick the entry type table. For each type, pick a meaningful (mandatory may be
+* easy - see below) header tag (like
+  name, file list, etc.) to derive a feature to be implemented. At the end,
+  (almost) all types should be correctly handled
 * Decide a sensible behaviour for missing mandatory tags. Then, pick all
   mandatory header tags and build a feature for them if not already covered
   with previous method.
+* Decide how to handle optional tags (return nil?)

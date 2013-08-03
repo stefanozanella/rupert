@@ -1,5 +1,6 @@
 require 'rupert/rpm/lead'
-require 'rupert/rpm/signature'
+require 'rupert/rpm/index'
+require 'rupert/rpm/entry'
 
 module Rupert
   class Parser
@@ -11,49 +12,57 @@ module Rupert
       # TODO Fit to current design (i.e. no parsing in Lead c'tor?)
       lead = RPM::Lead.new(@raw_io)
 
-      entry_count, store_size = parse_header
-      entries = parse_entries(entry_count)
+      signature = parse_index(@raw_io)
 
-      store = parse_store(store_size)
-      content = parse_content
+      # TODO I'd like to get rid of this duplication, but still don't know how.
+      # Ideally, raw signed content should be available from both archive and
+      # header, and concatenated to calculate checksum.
+      content = parse_content @raw_io
+      @raw_io.seek(-content.length, IO::SEEK_CUR)
 
-      signature = RPM::Signature.new(RPM::Signature::Index.new(entries, store))
+      header = parse_index(@raw_io)
 
-      RPM.new(lead, signature, content)
+      RPM.new(lead, signature, content, header)
     end
 
     private
 
-    def parse_header
+    def parse_header(raw_io)
       header_size = 16
       header_format =  "@8NN"
 
-      @raw_io.read(header_size).unpack(header_format)
+      raw_io.read(header_size).unpack(header_format)
     end
 
-    def parse_entries(count)
+    def parse_store(size, raw_io)
+      StringIO.new(raw_io.read(nearest_multiple(8, size)))
+    end
+
+    def parse_content(raw_io)
+      raw_io.read.force_encoding(Encoding::ASCII_8BIT)
+    end
+
+    def parse_index(raw_io)
+      index = RPM::Index.new
+
+      entry_count, store_size = parse_header(raw_io)
+      entry_count.times do
+        index.add parse_entry(raw_io)
+      end
+
+      index.store = parse_store(store_size, raw_io)
+
+      index
+    end
+
+    def parse_entry(raw_io)
       entry_size = 16
       entry_format = "NNNN"
 
-      entries = Hash.new
-      count.times do
-        tag, type, offset, count = @raw_io.read(entry_size).unpack(entry_format)
-        entry = RPM::Signature::Entry.new tag, type, offset, count
-        entries[entry.tag] = entry
-      end
-
-      entries
+      RPM::Entry.new(*raw_io.read(entry_size).unpack(entry_format))
     end
 
-    def parse_store(size)
-      RPM::Signature::Store.new(StringIO.new(@raw_io.read(nearest_multiple(size, 8))))
-    end
-
-    def parse_content
-      @raw_io.read
-    end
-
-    def nearest_multiple(size, modulo)
+    def nearest_multiple(modulo, size)
       (size / modulo.to_f).ceil * modulo
     end
   end

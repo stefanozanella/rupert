@@ -2,6 +2,7 @@ require 'rupert/errors'
 require 'rupert/parser'
 require 'rupert/rpm/lead'
 require 'rupert/rpm/signature'
+require 'rupert/rpm/header'
 
 require 'base64'
 
@@ -39,12 +40,14 @@ module Rupert
     # alternative.
     #
     # @param lead [Rupert::RPM::Lead] RPM lead section
-    # @param signature [Rupert::RPM::Signature] RPM signature section
+    # @param signature [Rupert::RPM::Index] RPM signature section
     # @param content [String] Raw content found after the signature structure
-    def initialize(lead, signature, content)
+    # @param header [Rupert::RPM::Index] RPM header holding package metadata
+    def initialize(lead, signature, content, header)
       @lead = lead
-      @signature = signature
+      @signature = Signature.new signature
       @content = content
+      @header = Header.new header
     end
 
     # RPM version used to encode the package.
@@ -76,7 +79,7 @@ module Rupert
     #
     # @return [String] package name in the form +<name>-<version>-<rev>.<suffix>+
     def name
-      @lead.name
+      @header.name
     end
 
     # OS for which the package was built

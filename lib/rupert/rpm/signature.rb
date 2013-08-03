@@ -1,5 +1,3 @@
-require 'rupert/rpm/signature/index'
-
 module Rupert
   class RPM
     class Signature

@@ -37,7 +37,7 @@ describe Rupert::RPM do
   end
 
   it "tells the package's name" do
-    rpm.name.must_equal "rpm-4.8.0-32.el6"
+    rpm.name.must_equal "rpm"
   end
 
   it "tells the operating system for which the package has been built" do

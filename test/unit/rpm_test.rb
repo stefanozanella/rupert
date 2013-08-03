@@ -1,19 +1,34 @@
 require 'test_helper'
 
 describe Rupert::RPM do
-  let(:signature)      { mock }
-  let(:rpm)            { Rupert::RPM.new(nil, signature, signed_content) }
-  let(:signed_content) { ascii("\x01\x02\x03\x04") }
+  let(:md5_signature_tag) { Rupert::RPM::Signature::MD5_TAG }
+  let(:name_tag)          { Rupert::RPM::Header::NAME_TAG }
+  let(:signature)         { mock }
+  let(:header)            { mock }
+  let(:rpm)               { Rupert::RPM.new(nil, signature, signed_content, header) }
+  let(:corrupted_rpm)     { Rupert::RPM.new(nil, signature, corrupted_content, header) }
+  let(:signed_content)    { ascii("\x01\x02\x03\x04") }
+  let(:corrupted_content) { ascii("\xf4\x04\x57\x1e") }
 
-  it "exposes the MD5 digest held by the signature" do
-    signature.expects(:md5).once.returns("abc")
+  it "fetches the MD5 from its index" do
+    signature.expects(:get).once.with(md5_signature_tag).returns("abc")
 
     rpm.md5
   end
 
-  it "asks the signature to verify content integrity" do
-    signature.expects(:verify_checksum).once.with(signed_content)
+  it "correctly verifies integrity of pristine and corrupted packages" do
+    signature.stubs(:get).returns(md5(signed_content))
 
-    rpm.intact?
+    assert rpm.intact?,
+           "expected RPM to be intact, but it wasn't"
+
+    refute corrupted_rpm.intact?,
+           "expected RPM not to be intact, but it was"
+  end
+
+  it "exposes RPM name stored in the header" do
+    header.expects(:get).once.with(name_tag)
+
+    rpm.name
   end
 end
