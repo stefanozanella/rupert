@@ -117,5 +117,19 @@ module Rupert
     def intact?
       @signature.verify_checksum(@content)      
     end
+
+    # Package uncompressed size.
+    #
+    # This is the size (in bytes) of the uncompressed archive, or if you
+    # prefer, package's installed size.
+    #
+    # *NOTE*: if reading a package built with native +rpmbuild+, this number
+    # (which is stored in the RPM itself) might not be precise, as
+    # this[http://rpm5.org/community/rpm-devel/2689.html] thread explains. 
+    #
+    # @return [Fixnum] package uncompressed size (bytes)
+    def uncompressed_size
+      @header.uncompressed_size
+    end
   end
 end

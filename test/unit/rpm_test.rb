@@ -3,6 +3,7 @@ require 'test_helper'
 describe Rupert::RPM do
   let(:md5_signature_tag) { Rupert::RPM::Signature::MD5_TAG }
   let(:name_tag)          { Rupert::RPM::Header::NAME_TAG }
+  let(:size_tag)          { Rupert::RPM::Header::SIZE_TAG }
   let(:signature)         { mock }
   let(:header)            { mock }
   let(:rpm)               { Rupert::RPM.new(nil, signature, signed_content, header) }
@@ -30,5 +31,11 @@ describe Rupert::RPM do
     header.expects(:get).once.with(name_tag)
 
     rpm.name
+  end
+
+  it "exposes RPM uncompressed size stored in the header" do
+    header.expects(:get).once.with(size_tag)
+
+    rpm.uncompressed_size
   end
 end

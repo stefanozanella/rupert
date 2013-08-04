@@ -1,9 +1,6 @@
 module Rupert
   class RPM
     class Entry
-      STRING_TYPE = 6.freeze
-      BIN_TYPE = 7.freeze
-
       # Initializes a new index entry.
       #
       # @param tag [String] 4 byte entry tag (semantic data type)
@@ -42,13 +39,13 @@ module Rupert
       # which are in turn mapped in Ruby with:
       #
       # * +nil+
-      # * +String+ of length 1
-      # * +Fixnum+
-      # * +Fixnum+
-      # * +Fixnum+
-      # * +Fixnum+/+Bignum+
+      # * (+Array+ of) +String+ of length 1
+      # * (+Array+ of) +Fixnum+
+      # * (+Array+ of) +Fixnum+
+      # * (+Array+ of) +Fixnum+
+      # * (+Array+ of) +Fixnum+/+Bignum+
       # * +String+ of arbitrary length
-      # * +String+ of aribtrary length, 8-bit ASCII encoded
+      # * +String+ of arbitrary length, 8-bit ASCII encoded
       # * +Array+ of +String+
       # * +Array+ of +String+
       #
@@ -63,13 +60,7 @@ module Rupert
       #         the entry prescribe
       def resolve(store)
         store.seek(offset, IO::SEEK_SET)
-
-        case type
-        when BIN_TYPE
-          binary_from store
-        when STRING_TYPE
-          string_from store
-        end
+        read_and_convert(type, store)
       end
 
       private
@@ -77,13 +68,29 @@ module Rupert
       # :nodoc: Null byte used to indicate string termination
       NULL_CHAR = "\x00".force_encoding(Encoding::ASCII_8BIT)
 
-      def binary_from(store)
+      # :nodoc: Map of numerical entry types to parsing functions
+      TYPE_MAP = {
+        4 => :int32,
+        6 => :string,
+        7 => :binary
+      }
+
+      # :nodoc: reads given type of data from given store
+      def read_and_convert(type, store)
+        method(TYPE_MAP[type]).call(store)
+      end
+
+      def int32(store)
+        store.read(4).unpack("N").first
+      end
+
+      def binary(store)
         store.read(count)
       end
 
       # :nodoc: Returns a null-terminated string, without the trailing null
       # character.
-      def string_from(store)
+      def string(store)
         store.gets(NULL_CHAR).chomp(NULL_CHAR)
       end
     end

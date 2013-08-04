@@ -20,6 +20,14 @@ describe Rupert::RPM do
     }.must_raise Rupert::NotAnRPM
   end
 
+  it "tells the package's name" do
+    rpm.name.must_equal "rpm"
+  end
+
+  it "tells the package uncompressed size (in bytes)" do
+    rpm.uncompressed_size.must_equal 2031240
+  end
+
   it "knows which version of RPM the file is" do
     rpm.rpm_version.must_equal "3.0"
   end
@@ -34,10 +42,6 @@ describe Rupert::RPM do
 
     assert source_rpm.source?, "failed to recognize RPM as source"
     refute source_rpm.binary?, "RPM misrecognized as of binary type"
-  end
-
-  it "tells the package's name" do
-    rpm.name.must_equal "rpm"
   end
 
   it "tells the operating system for which the package has been built" do
