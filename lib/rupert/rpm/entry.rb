@@ -68,30 +68,59 @@ module Rupert
       # :nodoc: Null byte used to indicate string termination
       NULL_CHAR = "\x00".force_encoding(Encoding::ASCII_8BIT)
 
-      # :nodoc: Map of numerical entry types to parsing functions
+      # :nodoc: Map of numerical entry types to parsing functions.
+      #
+      # NOTE: It turns out that distinguishing between strings and string
+      # arrays is irrelevant (at least with this implementation), since for
+      # every data type, if the count is 1 data is not wrapped in an array.
       TYPE_MAP = {
         4 => :int32,
         6 => :string,
-        7 => :binary
+        7 => :binary,
+        8 => :string
       }
 
-      # :nodoc: reads given type of data from given store
+      # :nodoc: Reads given type of data from given store
       def read_and_convert(type, store)
         method(TYPE_MAP[type]).call(store)
       end
 
+      # :nodoc: Returns a list of integers, or a single element if count is 1
       def int32(store)
-        store.read(4).unpack("N").first
+        first_or(array_of(lambda { one_int_32(store) }))
+      end
+
+      # :nodoc: Returns an array with given number of null-terminated strings,
+      # or a single string if count is 1
+      def string(store)
+        first_or(array_of(lambda { one_string(store) }))
       end
 
       def binary(store)
         store.read(count)
       end
 
-      # :nodoc: Returns a null-terminated string, without the trailing null
+      # :nodoc: Parses a single int32 from the store
+      def one_int_32(store)
+        store.read(4).unpack("N").first
+      end
+
+      # :nodoc: Parses a null-terminated string, without the trailing null
       # character.
-      def string(store)
+      def one_string(store)
         store.gets(NULL_CHAR).chomp(NULL_CHAR)
+      end
+
+      # :nodoc: Strips off array if it contains only one element
+      def first_or(ary)
+        ary.length == 1 ? ary.first : ary
+      end
+
+      # :nodoc: Builds an array of count elements parsed used given function
+      def array_of(parse_fun)
+        (1..count).inject([]) { |ary|
+          ary << parse_fun.call
+        }
       end
     end
   end

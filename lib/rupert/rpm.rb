@@ -131,5 +131,13 @@ module Rupert
     def uncompressed_size
       @header.uncompressed_size
     end
+
+    # List of the (base)names of installed files.
+    #
+    # @return [Array] array of +String+, with entries corresponding to file
+    #         basenames
+    def filenames
+      @header.basenames
+    end
   end
 end

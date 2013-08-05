@@ -28,6 +28,14 @@ describe Rupert::RPM do
     rpm.uncompressed_size.must_equal 2031240
   end
 
+  it "tells the full name of the files contained in the package" do
+    rpm.filenames.length.must_equal 0x8c
+
+    rpm.filenames.must_include "/bin/rpm"
+    rpm.filenames.must_include "/usr/share/doc/rpm-4.8.0/ChangeLog.bz2"
+    rpm.filenames.must_include "/var/lib/rpm/__db.009"
+  end
+
   it "knows which version of RPM the file is" do
     rpm.rpm_version.must_equal "3.0"
   end
@@ -37,11 +45,11 @@ describe Rupert::RPM do
   end
 
   it "tells if the file is a binary or source RPM" do
-    assert binary_rpm.binary?, "failed to recognize RPM as binary"
-    refute binary_rpm.source?, "RPM misrecognized as of source type"
+    binary_rpm.must_be :binary?
+    binary_rpm.wont_be :source?
 
-    assert source_rpm.source?, "failed to recognize RPM as source"
-    refute source_rpm.binary?, "RPM misrecognized as of binary type"
+    source_rpm.must_be :source?
+    source_rpm.wont_be :binary?
   end
 
   it "tells the operating system for which the package has been built" do
@@ -49,6 +57,6 @@ describe Rupert::RPM do
   end
 
   it "tells if package is signed" do
-    assert rpm.signed?, "expected the package to be signed, but it was not"
+    rpm.must_be :signed?
   end
 end

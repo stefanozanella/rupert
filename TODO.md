@@ -30,7 +30,8 @@
   once?.
 * I18N ???
 * Improve Index robustness against null values of store and entries, and for
-  missing tags -> decide what to return
+  missing tags -> decide what to return. Also improve robustness for invalid
+  types (cryptic metaprogramming errors are returned as of now).
 
 # Roadmap
 
