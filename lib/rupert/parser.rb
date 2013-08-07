@@ -20,12 +20,16 @@ module Rupert
       content = parse_content @raw_io
       @raw_io.seek(-content.length, IO::SEEK_CUR)
 
-      header = parse_index(@raw_io)
+      header = header_from(parse_index(@raw_io))
 
       RPM.new(lead, signature, content, header)
     end
 
     private
+
+    def header_from(index)
+      RPM::Header.new index
+    end
 
     def parse_header(raw_io)
       header_size = 16

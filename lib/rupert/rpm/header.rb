@@ -19,25 +19,36 @@ module Rupert
       #
       # @return [String]
       def name
-        @index.get NAME_TAG
+        @index.get(NAME_TAG)
       end
 
       # Package uncompressed size (bytes).
       #
       # @return [Fixnum]
       def uncompressed_size
-        @index.get SIZE_TAG
+        @index.get(SIZE_TAG)
       end
 
       # Package files basename list.
       #
       # @return [Array] of +String+
       def basenames
-        @index.get(DIRINDEXES_TAG).map { |idx|
-          @index.get(DIRNAMES_TAG)[idx]
-        }.zip(@index.get(BASENAMES_TAG)).map { |dir, name|
-          File.join(dir, name)
-        }
+        @index.get(BASENAMES_TAG)
+      end
+
+      # Installed directory list.
+      #
+      # @return [Array] of +String+
+      def dirnames
+        @index.get(DIRNAMES_TAG)
+      end
+
+      # Map between basenames and relative directories.
+      #
+      # @return [Array] of +Fixnum+, where each number represents an index in
+      # the +dirnames+ array
+      def dirindexes
+        @index.get(DIRINDEXES_TAG)
       end
     end
   end

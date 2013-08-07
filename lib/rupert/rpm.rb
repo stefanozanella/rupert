@@ -47,7 +47,7 @@ module Rupert
       @lead = lead
       @signature = Signature.new signature
       @content = content
-      @header = Header.new header
+      @header = header
     end
 
     # RPM version used to encode the package.
@@ -132,12 +132,16 @@ module Rupert
       @header.uncompressed_size
     end
 
-    # List of the (base)names of installed files.
+    # List of installed files (full paths).
     #
-    # @return [Array] array of +String+, with entries corresponding to file
-    #         basenames
+    # @return [Array] array of +String+, with entries corresponding to 
+    #         absolute filenames
     def filenames
-      @header.basenames
+      @header.dirindexes.map { |idx|
+        @header.dirnames[idx]
+      }.zip(@header.basenames).map { |dir, name|
+        File.join(dir, name)
+      }
     end
   end
 end

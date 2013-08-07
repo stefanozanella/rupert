@@ -2,11 +2,6 @@ require 'test_helper'
 
 describe Rupert::RPM do
   let(:md5_signature_tag) { Rupert::RPM::Signature::MD5_TAG }
-  let(:name_tag)          { Rupert::RPM::Header::NAME_TAG }
-  let(:size_tag)          { Rupert::RPM::Header::SIZE_TAG }
-  let(:basenames_tag)     { Rupert::RPM::Header::BASENAMES_TAG }
-  let(:dirnames_tag)     { Rupert::RPM::Header::DIRNAMES_TAG }
-  let(:dirindexes_tag)     { Rupert::RPM::Header::DIRINDEXES_TAG }
   let(:signature)         { mock }
   let(:header)            { mock }
   let(:rpm)               { Rupert::RPM.new(nil, signature, signed_content, header) }
@@ -31,21 +26,21 @@ describe Rupert::RPM do
   end
 
   it "exposes RPM name stored in the header" do
-    header.expects(:get).once.with(name_tag)
+    header.stubs(:name).returns("package-name")
 
-    rpm.name
+    rpm.name.must_equal("package-name")
   end
 
   it "exposes RPM uncompressed size stored in the header" do
-    header.expects(:get).once.with(size_tag)
+    header.stubs(:uncompressed_size).returns(1234)
 
-    rpm.uncompressed_size
+    rpm.uncompressed_size.must_equal 1234
   end
 
   it "exposes RPM basenames stored in the header" do
-    header.expects(:get).at_least_once.with(basenames_tag).returns(["file1", "file1", "file2"])
-    header.expects(:get).at_least_once.with(dirnames_tag).returns(["/dir1", "/dir2"])
-    header.expects(:get).at_least_once.with(dirindexes_tag).returns([0, 1, 0])
+    header.stubs(:basenames).returns(["file1", "file1", "file2"])
+    header.stubs(:dirnames).returns(["/dir1", "/dir2"])
+    header.stubs(:dirindexes).returns([0, 1, 0])
 
     rpm.filenames.must_equal [ "/dir1/file1", "/dir2/file1", "/dir1/file2" ]
   end
