@@ -11,7 +11,7 @@ module Rupert
         @tag, @type, @offset, @count = tag, type, offset, count
       end
 
-      attr_accessor :tag, :type, :offset, :count
+      attr_accessor :tag
 
       # Fetches referenced data from a store.
       #
@@ -59,8 +59,8 @@ module Rupert
       # @return [Object] data referenced by this entry, in whatever format
       #         the entry prescribe
       def resolve(store)
-        store.seek(offset, IO::SEEK_SET)
-        read_and_convert(type, store)
+        store.seek(@offset, IO::SEEK_SET)
+        read_and_convert(@type, store)
       end
 
       private
@@ -97,7 +97,7 @@ module Rupert
       end
 
       def binary(store)
-        store.read(count)
+        store.read(@count)
       end
 
       # :nodoc: Parses a single int32 from the store
@@ -118,7 +118,7 @@ module Rupert
 
       # :nodoc: Builds an array of count elements parsed used given function
       def array_of(parse_fun)
-        (1..count).inject([]) { |ary|
+        (1..@count).inject([]) { |ary|
           ary << parse_fun.call
         }
       end
