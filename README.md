@@ -24,6 +24,8 @@ Or install it yourself as:
 
 ## Usage
 
+### Parsing an RPM
+
 You can read an RPM simply with:
 
     rpm = Rupert::RPM.load('rpm-4.8.0-32.el6.x86_64.rpm')
@@ -34,6 +36,23 @@ or just check if a specific file is an RPM with:
 
 (note that loading a file that is not an RPM generates an exception)
 
+### Verifying RPM for corruption
+
+You can verify if an RPM is corrupted after loading it with:
+
+    rpm.intact?
+
+Note that this only verifies if the MD5 stored in RPM metadata corresponds to
+the MD5 calculated over the content and metadata itself. It doesn't provide any
+warranty that the packages has been _maliciously_ altered. For this, you need
+to check package _signature_.
+
+### List of installed files
+
+The list of installed files is returned as an array of absolute filenames with:
+
+    rpm.filenames
+
 ## Contributing
 
 1. Fork it
@@ -41,3 +60,7 @@ or just check if a specific file is an RPM with:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Changelog
+
+See [Changelog.md](Changelog.md)
