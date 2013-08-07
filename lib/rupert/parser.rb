@@ -12,7 +12,7 @@ module Rupert
       # TODO Fit to current design (i.e. no parsing in Lead c'tor?)
       lead = RPM::Lead.new(@raw_io)
 
-      signature = parse_index(@raw_io)
+      signature = signature_from(parse_index(@raw_io))
 
       # TODO I'd like to get rid of this duplication, but still don't know how.
       # Ideally, raw signed content should be available from both archive and
@@ -29,6 +29,10 @@ module Rupert
 
     def header_from(index)
       RPM::Header.new index
+    end
+
+    def signature_from(index)
+      RPM::Signature.new index
     end
 
     def parse_header(raw_io)

@@ -24,6 +24,19 @@ def ascii(string)
   string.force_encoding(Encoding::ASCII_8BIT)
 end
 
+# Returns a random binary string (8-bit ASCII encoding) of given length
+def random_ascii(size)
+  require 'securerandom'
+  ascii(SecureRandom.random_bytes(size))
+end
+
+# Returns the (strict) base64 representation of given string
+def base64(string)
+  require 'base64'
+
+  Base64.strict_encode64(string)
+end
+
 # Pads a string with nulls to fill given length
 def pad(string, length)
   ("%-#{length}.#{length}s" % string).gsub(" ", "\x00")

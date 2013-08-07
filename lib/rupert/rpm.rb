@@ -40,12 +40,12 @@ module Rupert
     # alternative.
     #
     # @param lead [Rupert::RPM::Lead] RPM lead section
-    # @param signature [Rupert::RPM::Index] RPM signature section
+    # @param signature [Rupert::RPM::Signature] RPM signature information
     # @param content [String] Raw content found after the signature structure
-    # @param header [Rupert::RPM::Index] RPM header holding package metadata
+    # @param header [Rupert::RPM::Header] RPM header holding package metadata
     def initialize(lead, signature, content, header)
       @lead = lead
-      @signature = Signature.new signature
+      @signature = signature
       @content = content
       @header = header
     end
@@ -115,7 +115,7 @@ module Rupert
     # @return +true+ if package is intact, +false+ if package (either stored MD5 or
     # payload) is corrupted
     def intact?
-      @signature.verify_checksum(@content)      
+      @signature.md5 == Digest::MD5.digest(@content)
     end
 
     # Package uncompressed size.
