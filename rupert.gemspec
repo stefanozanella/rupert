@@ -31,4 +31,7 @@ Gem::Specification.new do |spec|
   spec.description = %s{
     Rupert allows to manipulate RPM files independently from availability of rpmlib.
   }
+
+  spec.signing_key = File.expand_path "~/.ssh/rubygems-stefanozanella.key"
+  spec.cert_chain  = ["rubygems-stefanozanella.crt"]
 end
