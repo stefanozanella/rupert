@@ -2,6 +2,7 @@ require 'test_helper'
 
 describe Rupert::RPM::Header do
   let(:name_tag)       { Rupert::RPM::Header::NAME_TAG }
+  let(:version_tag)    { Rupert::RPM::Header::VERSION_TAG }
   let(:size_tag)       { Rupert::RPM::Header::SIZE_TAG }
   let(:basenames_tag)  { Rupert::RPM::Header::BASENAMES_TAG }
   let(:dirnames_tag)   { Rupert::RPM::Header::DIRNAMES_TAG }
@@ -14,6 +15,12 @@ describe Rupert::RPM::Header do
     index.expects(:get).once.with(name_tag)
 
     header.name
+  end
+
+  it "maps RPM version stored in the header" do
+    index.expects(:get).once.with(version_tag)
+
+    header.version
   end
 
   it "maps RPM uncompressed size stored in the header" do

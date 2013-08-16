@@ -1,5 +1,8 @@
 # Changelog
 
+* Other fields being read from header structure:
+  * version
+
 ## 0.0.2
 
 * First pieces of metadata fetched from RPM header structure:

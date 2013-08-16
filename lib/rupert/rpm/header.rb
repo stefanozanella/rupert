@@ -2,6 +2,7 @@ module Rupert
   class RPM
     class Header
       NAME_TAG      = 1000.freeze
+      VERSION_TAG   = 1001.freeze
       SIZE_TAG      = 1009.freeze
       DIRINDEXES_TAG = 1116.freeze
       BASENAMES_TAG = 1117.freeze
@@ -20,6 +21,13 @@ module Rupert
       # @return [String]
       def name
         @index.get(NAME_TAG)
+      end
+
+      # Package version.
+      #
+      # @return [String]
+      def version
+        @index.get(VERSION_TAG)
       end
 
       # Package uncompressed size (bytes).

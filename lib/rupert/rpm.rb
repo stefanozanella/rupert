@@ -82,6 +82,13 @@ module Rupert
       @header.name
     end
 
+    # Package version
+    #
+    # @return [String] package version as defined in the spec file
+    def version
+      @header.version
+    end
+
     # OS for which the package was built
     #
     # @return [String] as defined in _/usr/lib/rpm/rpmrc_ under the canonical OS
