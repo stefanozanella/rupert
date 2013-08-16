@@ -38,7 +38,7 @@ describe Rupert::RPM do
   end
 
   it "exposes RPM uncompressed size stored in the header" do
-    header.stubs(:uncompressed_size).returns(1234)
+    header.stubs(:size).returns(1234)
 
     rpm.uncompressed_size.must_equal 1234
   end

@@ -1,12 +1,18 @@
 module Rupert
   class RPM
     class Header
-      NAME_TAG      = 1000.freeze
-      VERSION_TAG   = 1001.freeze
-      SIZE_TAG      = 1009.freeze
-      DIRINDEXES_TAG = 1116.freeze
-      BASENAMES_TAG = 1117.freeze
-      DIRNAMES_TAG  = 1118.freeze
+      # Map of all available tags and their numerical code.
+      #
+      # To each tag corresponds a direct method that returns the value
+      # associated to it.
+      TAGS = {
+        :name       => 1000,
+        :version    => 1001,
+        :size       => 1009,
+        :dirindexes => 1116,
+        :basenames  => 1117,
+        :dirnames   => 1118
+      }.freeze
 
       # Creates a new header.
       #
@@ -16,47 +22,10 @@ module Rupert
         @index = index
       end
 
-      # Package name.
-      #
-      # @return [String]
-      def name
-        @index.get(NAME_TAG)
-      end
-
-      # Package version.
-      #
-      # @return [String]
-      def version
-        @index.get(VERSION_TAG)
-      end
-
-      # Package uncompressed size (bytes).
-      #
-      # @return [Fixnum]
-      def uncompressed_size
-        @index.get(SIZE_TAG)
-      end
-
-      # Package files basename list.
-      #
-      # @return [Array] of +String+
-      def basenames
-        @index.get(BASENAMES_TAG)
-      end
-
-      # Installed directory list.
-      #
-      # @return [Array] of +String+
-      def dirnames
-        @index.get(DIRNAMES_TAG)
-      end
-
-      # Map between basenames and relative directories.
-      #
-      # @return [Array] of +Fixnum+, where each number represents an index in
-      # the +dirnames+ array
-      def dirindexes
-        @index.get(DIRINDEXES_TAG)
+      TAGS.keys.each do |field|
+        define_method(field) do
+          @index.get(TAGS[field])
+        end
       end
     end
   end

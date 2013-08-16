@@ -44,10 +44,7 @@ module Rupert
     # @param content [String] Raw content found after the signature structure
     # @param header [Rupert::RPM::Header] RPM header holding package metadata
     def initialize(lead, signature, content, header)
-      @lead = lead
-      @signature = signature
-      @content = content
-      @header = header
+      @lead, @signature, @content, @header = lead, signature, content, header
     end
 
     # RPM version used to encode the package.
@@ -72,7 +69,7 @@ module Rupert
     #
     # @return [String] package architecture name
     def rpm_arch
-     @lead.arch
+      @lead.arch
     end
 
     # Full package name
@@ -136,7 +133,7 @@ module Rupert
     #
     # @return [Fixnum] package uncompressed size (bytes)
     def uncompressed_size
-      @header.uncompressed_size
+      @header.size
     end
 
     # List of installed files (full paths).
