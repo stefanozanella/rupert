@@ -55,6 +55,12 @@ describe Rupert::RPM do
     rpm.arch.must_equal("unusual_architecture")
   end
 
+  it "exposes RPM license name stored in the header" do
+    header.stubs(:license).returns("WTFPL")
+
+    rpm.license.must_equal("WTFPL")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

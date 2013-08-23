@@ -40,6 +40,10 @@ describe Rupert::RPM do
     rpm.arch.must_equal "x86_64"
   end
 
+  it "tells how the package is licensed" do
+    rpm.license.must_equal "GPLv2+"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

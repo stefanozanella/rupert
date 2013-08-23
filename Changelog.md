@@ -5,6 +5,7 @@
   * release string
   * target os name
   * target architecture
+  * license name
 
 ## 0.0.2
 

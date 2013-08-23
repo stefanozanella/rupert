@@ -107,6 +107,13 @@ module Rupert
       @header.arch
     end
 
+    # The name of the license used for the package
+    #
+    # @return [String] license name as defined in the spec file
+    def license
+      @header.license
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?

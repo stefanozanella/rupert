@@ -35,6 +35,12 @@ describe Rupert::RPM::Header do
     header.arch
   end
 
+  it "maps RPM license name stored in the header" do
+    index.expects(:get).once.with(tags[:license])
+
+    header.license
+  end
+
   it "maps RPM uncompressed size stored in the header" do
     index.expects(:get).once.with(tags[:size])
 
