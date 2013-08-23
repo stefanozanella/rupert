@@ -4,6 +4,7 @@
   * version number
   * release string
   * target os name
+  * target architecture
 
 ## 0.0.2
 

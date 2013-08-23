@@ -49,6 +49,12 @@ describe Rupert::RPM do
     rpm.os.must_equal("some_crazy_os")
   end
 
+  it "exposes RPM target architecture string stored in the header" do
+    header.stubs(:arch).returns("unusual_architecture")
+
+    rpm.arch.must_equal("unusual_architecture")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

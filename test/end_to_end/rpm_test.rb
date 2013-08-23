@@ -36,6 +36,10 @@ describe Rupert::RPM do
     rpm.os.must_equal "linux"
   end
 
+  it "tells the package's target architecture" do
+    rpm.arch.must_equal "x86_64"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

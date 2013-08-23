@@ -95,10 +95,16 @@ module Rupert
 
     # OS for which the package was built
     #
-    # @return [String] as defined in _/usr/lib/rpm/rpmrc_ under the canonical OS
-    #         names section
+    # @return [String] package target os as defined in the spec file
     def os
       @header.os
+    end
+
+    # Target architecture of the package
+    #
+    # @return [String] the name of the architecture the package was built for
+    def arch
+      @header.arch
     end
 
     # @return +true+ if the package is signed, +false+ otherwise
