@@ -3,6 +3,8 @@ $:.unshift('lib') unless $:.include?('lib')
 require 'pathname'
 require 'rupert/version'
 
+signing_key_file = ENV['RUBYGEMS_SIGNING_KEY_FILE']
+
 Gem::Specification.new do |spec|
   spec.name             = "rupert"
   spec.version          = Rupert::VERSION
@@ -33,6 +35,8 @@ Gem::Specification.new do |spec|
     Rupert allows to manipulate RPM files independently from availability of rpmlib.
   }
 
-  #spec.signing_key = Pathname.new("~/.ssh/rubygems-stefanozanella.key").expand_path
-  #spec.cert_chain  = ["rubygems-stefanozanella.crt"]
+  # Set local path to signing key with the RUBYGEMS_SIGNING_KEY_FILE env var.
+  # To automate this setting, you may take a look at the `direnv` tool.
+  spec.signing_key = Pathname.new(signing_key_file).expand_path if signing_key_file
+  spec.cert_chain  = ["rubygems-stefanozanella.crt"]
 end

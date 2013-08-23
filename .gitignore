@@ -3,6 +3,7 @@
 *.swo
 *.swp
 .bundle
+.envrc
 Gemfile.lock
 coverage
 pkg
