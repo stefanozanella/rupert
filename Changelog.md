@@ -8,6 +8,7 @@
   * license name
   * payload format
   * payload compressor
+  * payload flags
 
 ## 0.0.2
 

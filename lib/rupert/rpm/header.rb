@@ -18,6 +18,7 @@ module Rupert
         :dirnames           => 1118,
         :payload_format     => 1124,
         :payload_compressor => 1125,
+        :payload_flags      => 1126,
       }.freeze
 
       # Creates a new header.

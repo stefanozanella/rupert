@@ -73,6 +73,12 @@ describe Rupert::RPM do
     rpm.payload_compressor.must_equal("bzip2")
   end
 
+  it "exposes RPM payload flags stored in the header" do
+    header.stubs(:payload_flags).returns("whoknows?")
+
+    rpm.payload_flags.must_equal("whoknows?")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

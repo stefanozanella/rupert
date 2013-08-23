@@ -14,6 +14,7 @@ describe Rupert::RPM::Header do
       :license,
       :payload_format,
       :payload_compressor,
+      :payload_flags,
       :size,
       :basenames,
       :dirnames,

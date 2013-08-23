@@ -128,6 +128,19 @@ module Rupert
       @header.payload_compressor
     end
 
+    # The PAYLOADFLAGS metadata field.
+    #
+    # The purpose of this field is still opaque for me; also, note that
+    # according to
+    # http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch-package-structure.html
+    # it should always be set to +9+. But, in practice, this is now always the
+    # case.
+    #
+    # @return [String] PAYLOADFLAGS field
+    def payload_flags
+      @header.payload_flags
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?

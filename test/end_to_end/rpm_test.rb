@@ -52,6 +52,10 @@ describe Rupert::RPM do
     rpm.payload_compressor.must_equal "xz"
   end
 
+  it "reads the PAYLOADFLAGS field" do
+    rpm.payload_flags.must_equal "2"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end
