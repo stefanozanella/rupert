@@ -97,6 +97,12 @@ describe Rupert::RPM do
     rpm.packager.must_equal("John Doe <john@doe.com>")
   end
 
+  it "exposes RPM vendor info stored in the header" do
+    header.stubs(:vendor).returns("Example Inc.")
+
+    rpm.vendor.must_equal("Example Inc.")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

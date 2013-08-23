@@ -22,6 +22,7 @@ module Rupert
         :build_host         => 1007,
         :build_date         => 1006,
         :packager           => 1015,
+        :vendor             => 1011,
       }.freeze
 
       # Creates a new header.

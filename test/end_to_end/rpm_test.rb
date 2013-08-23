@@ -68,6 +68,10 @@ describe Rupert::RPM do
     rpm.packager.must_equal "CentOS BuildSystem <http://bugs.centos.org>"
   end
 
+  it "reads the info about the vendor" do
+    rpm.vendor.must_equal "CentOS"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

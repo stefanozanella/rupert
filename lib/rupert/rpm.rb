@@ -162,6 +162,13 @@ module Rupert
       @header.packager
     end
 
+    # Information about the vendor of the package.
+    #
+    # @return [String] package's vendor
+    def vendor
+      @header.vendor
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?
