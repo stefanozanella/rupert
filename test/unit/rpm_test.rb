@@ -103,6 +103,12 @@ describe Rupert::RPM do
     rpm.vendor.must_equal("Example Inc.")
   end
 
+  it "exposes package URL stored in the header" do
+    header.stubs(:url).returns("http://example.com")
+
+    rpm.url.must_equal("http://example.com")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

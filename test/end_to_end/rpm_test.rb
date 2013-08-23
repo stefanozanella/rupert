@@ -72,6 +72,10 @@ describe Rupert::RPM do
     rpm.vendor.must_equal "CentOS"
   end
 
+  it "reads the package URL" do
+    rpm.url.must_equal "http://www.rpm.org/"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

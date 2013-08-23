@@ -13,6 +13,7 @@
   * build time
   * packager info
   * vendor info
+  * package URL
 
 ## 0.0.2
 

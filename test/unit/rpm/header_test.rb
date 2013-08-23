@@ -19,6 +19,7 @@ describe Rupert::RPM::Header do
       :build_date,
       :packager,
       :vendor,
+      :url,
       :size,
       :basenames,
       :dirnames,

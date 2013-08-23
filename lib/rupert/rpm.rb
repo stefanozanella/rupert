@@ -169,6 +169,13 @@ module Rupert
       @header.vendor
     end
 
+    # Package homepage URL.
+    #
+    # @return [String] package URL
+    def url
+      @header.url
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?
