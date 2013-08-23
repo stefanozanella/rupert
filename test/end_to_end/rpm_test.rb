@@ -48,6 +48,10 @@ describe Rupert::RPM do
     rpm.payload_format.must_equal "cpio"
   end
 
+  it "tells how the payload is compressed" do
+    rpm.payload_compressor.must_equal "xz"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

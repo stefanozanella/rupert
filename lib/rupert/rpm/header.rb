@@ -6,17 +6,18 @@ module Rupert
       # To each tag corresponds a direct method that returns the value
       # associated to it.
       TAGS = {
-        :name           => 1000,
-        :version        => 1001,
-        :release        => 1002,
-        :size           => 1009,
-        :license        => 1014,
-        :os             => 1021,
-        :arch           => 1022,
-        :dirindexes     => 1116,
-        :basenames      => 1117,
-        :dirnames       => 1118,
-        :payload_format => 1124,
+        :name               => 1000,
+        :version            => 1001,
+        :release            => 1002,
+        :size               => 1009,
+        :license            => 1014,
+        :os                 => 1021,
+        :arch               => 1022,
+        :dirindexes         => 1116,
+        :basenames          => 1117,
+        :dirnames           => 1118,
+        :payload_format     => 1124,
+        :payload_compressor => 1125,
       }.freeze
 
       # Creates a new header.

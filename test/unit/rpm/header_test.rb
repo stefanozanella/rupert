@@ -47,6 +47,12 @@ describe Rupert::RPM::Header do
     header.payload_format
   end
 
+  it "maps RPM payload compressor name stored in the header" do
+    index.expects(:get).once.with(tags[:payload_compressor])
+
+    header.payload_compressor
+  end
+
   it "maps RPM uncompressed size stored in the header" do
     index.expects(:get).once.with(tags[:size])
 

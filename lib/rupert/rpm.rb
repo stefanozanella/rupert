@@ -121,6 +121,13 @@ module Rupert
       @header.payload_format
     end
 
+    # The compression function applied to package's payload.
+    #
+    # @return [String] payload compressor name
+    def payload_compressor
+      @header.payload_compressor
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?

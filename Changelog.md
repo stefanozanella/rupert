@@ -7,6 +7,7 @@
   * target architecture
   * license name
   * payload format
+  * payload compressor
 
 ## 0.0.2
 
