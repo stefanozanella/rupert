@@ -9,6 +9,7 @@
   * payload format
   * payload compressor
   * payload flags
+  * build host
 
 ## 0.0.2
 

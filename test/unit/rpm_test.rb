@@ -79,6 +79,12 @@ describe Rupert::RPM do
     rpm.payload_flags.must_equal("whoknows?")
   end
 
+  it "exposes RPM build host name stored in the header" do
+    header.stubs(:build_host).returns("abc.example.com")
+
+    rpm.build_host.must_equal("abc.example.com")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

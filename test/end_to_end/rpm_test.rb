@@ -56,6 +56,10 @@ describe Rupert::RPM do
     rpm.payload_flags.must_equal "2"
   end
 
+  it "reads the name of the buildhost" do
+    rpm.build_host.must_equal "c6b8.bsys.dev.centos.org"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

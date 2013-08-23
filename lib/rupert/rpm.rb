@@ -141,6 +141,13 @@ module Rupert
       @header.payload_flags
     end
 
+    # The hostname of the build machine the package has been built on.
+    #
+    # @return [String] FQDN of the host the package has been built on
+    def build_host
+      @header.build_host
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?
