@@ -17,6 +17,7 @@ describe Rupert::RPM::Header do
       :payload_flags,
       :build_host,
       :build_date,
+      :packager,
       :size,
       :basenames,
       :dirnames,

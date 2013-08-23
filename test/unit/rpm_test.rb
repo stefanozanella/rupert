@@ -91,6 +91,12 @@ describe Rupert::RPM do
     rpm.build_date.must_equal(Time.at(123456).to_datetime)
   end
 
+  it "exposes RPM packager info stored in the header" do
+    header.stubs(:packager).returns("John Doe <john@doe.com>")
+
+    rpm.packager.must_equal("John Doe <john@doe.com>")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

@@ -11,6 +11,7 @@
   * payload flags
   * build host
   * build time
+  * packager info
 
 ## 0.0.2
 

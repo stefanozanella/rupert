@@ -64,6 +64,10 @@ describe Rupert::RPM do
     rpm.build_date.must_equal DateTime.parse('Fri 22 Feb 2013 03:13:55 AM CET')
   end
 
+  it "reads the info about the packager" do
+    rpm.packager.must_equal "CentOS BuildSystem <http://bugs.centos.org>"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

@@ -155,6 +155,13 @@ module Rupert
       Time.at(@header.build_date).to_datetime
     end
 
+    # Information about the packager.
+    #
+    # @return [String] usually info like full name and email of the packager
+    def packager
+      @header.packager
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?
