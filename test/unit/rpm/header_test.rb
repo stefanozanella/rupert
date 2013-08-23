@@ -16,6 +16,7 @@ describe Rupert::RPM::Header do
       :payload_compressor,
       :payload_flags,
       :build_host,
+      :build_date,
       :size,
       :basenames,
       :dirnames,

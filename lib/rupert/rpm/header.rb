@@ -20,6 +20,7 @@ module Rupert
         :payload_compressor => 1125,
         :payload_flags      => 1126,
         :build_host         => 1007,
+        :build_date         => 1006,
       }.freeze
 
       # Creates a new header.

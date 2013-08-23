@@ -10,6 +10,7 @@
   * payload compressor
   * payload flags
   * build host
+  * build time
 
 ## 0.0.2
 

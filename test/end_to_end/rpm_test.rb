@@ -60,6 +60,10 @@ describe Rupert::RPM do
     rpm.build_host.must_equal "c6b8.bsys.dev.centos.org"
   end
 
+  it "reads the package building datetime" do
+    rpm.build_date.must_equal DateTime.parse('Fri 22 Feb 2013 03:13:55 AM CET')
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

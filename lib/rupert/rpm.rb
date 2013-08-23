@@ -148,6 +148,13 @@ module Rupert
       @header.build_host
     end
 
+    # The point in time at which the package was built.
+    #
+    # @return [DateTime] when the package was built
+    def build_date
+      Time.at(@header.build_date).to_datetime
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?

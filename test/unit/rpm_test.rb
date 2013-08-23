@@ -85,6 +85,12 @@ describe Rupert::RPM do
     rpm.build_host.must_equal("abc.example.com")
   end
 
+  it "exposes RPM build time stored in the header" do
+    header.stubs(:build_date).returns(123456)
+
+    rpm.build_date.must_equal(Time.at(123456).to_datetime)
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 
