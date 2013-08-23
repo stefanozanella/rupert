@@ -37,6 +37,12 @@ describe Rupert::RPM do
     rpm.version.must_equal("0.0.0")
   end
 
+  it "exposes RPM release string stored in the header" do
+    header.stubs(:release).returns("111.abc")
+
+    rpm.release.must_equal("111.abc")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

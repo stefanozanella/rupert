@@ -28,6 +28,10 @@ describe Rupert::RPM do
     rpm.version.must_equal "4.8.0"
   end
 
+  it "tells the package's release" do
+    rpm.release.must_equal "32.el6"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

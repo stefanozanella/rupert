@@ -1,7 +1,8 @@
 # Changelog
 
 * Other fields being read from header structure:
-  * version
+  * version number
+  * release string
 
 ## 0.0.2
 

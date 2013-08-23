@@ -8,6 +8,7 @@ module Rupert
       TAGS = {
         :name       => 1000,
         :version    => 1001,
+        :release    => 1002,
         :size       => 1009,
         :dirindexes => 1116,
         :basenames  => 1117,
