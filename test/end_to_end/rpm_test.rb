@@ -32,6 +32,10 @@ describe Rupert::RPM do
     rpm.release.must_equal "32.el6"
   end
 
+  it "tells the package's target OS" do
+    rpm.os.must_equal "linux"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end
@@ -58,10 +62,6 @@ describe Rupert::RPM do
 
     source_rpm.must_be :source?
     source_rpm.wont_be :binary?
-  end
-
-  it "tells the operating system for which the package has been built" do
-    rpm.os.must_equal "Linux"
   end
 
   it "tells if package is signed" do

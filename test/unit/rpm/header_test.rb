@@ -23,6 +23,12 @@ describe Rupert::RPM::Header do
     header.release
   end
 
+  it "maps RPM release stored in the header" do
+    index.expects(:get).once.with(tags[:os])
+
+    header.os
+  end
+
   it "maps RPM uncompressed size stored in the header" do
     index.expects(:get).once.with(tags[:size])
 

@@ -43,6 +43,12 @@ describe Rupert::RPM do
     rpm.release.must_equal("111.abc")
   end
 
+  it "exposes RPM target OS string stored in the header" do
+    header.stubs(:os).returns("some_crazy_os")
+
+    rpm.os.must_equal("some_crazy_os")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

@@ -98,7 +98,7 @@ module Rupert
     # @return [String] as defined in _/usr/lib/rpm/rpmrc_ under the canonical OS
     #         names section
     def os
-      @lead.os
+      @header.os
     end
 
     # @return +true+ if the package is signed, +false+ otherwise

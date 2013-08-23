@@ -10,6 +10,7 @@ module Rupert
         :version    => 1001,
         :release    => 1002,
         :size       => 1009,
+        :os         => 1021,
         :dirindexes => 1116,
         :basenames  => 1117,
         :dirnames   => 1118

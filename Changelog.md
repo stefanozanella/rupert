@@ -3,6 +3,7 @@
 * Other fields being read from header structure:
   * version number
   * release string
+  * target os name
 
 ## 0.0.2
 
