@@ -1,5 +1,6 @@
 # coding: utf-8
 $:.unshift('lib') unless $:.include?('lib')
+require 'pathname'
 require 'rupert/version'
 
 Gem::Specification.new do |spec|
@@ -32,6 +33,6 @@ Gem::Specification.new do |spec|
     Rupert allows to manipulate RPM files independently from availability of rpmlib.
   }
 
-  spec.signing_key = File.expand_path "~/.ssh/rubygems-stefanozanella.key"
-  spec.cert_chain  = ["rubygems-stefanozanella.crt"]
+  #spec.signing_key = Pathname.new("~/.ssh/rubygems-stefanozanella.key").expand_path
+  #spec.cert_chain  = ["rubygems-stefanozanella.crt"]
 end
