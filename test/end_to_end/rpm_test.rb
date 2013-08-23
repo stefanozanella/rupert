@@ -44,6 +44,10 @@ describe Rupert::RPM do
     rpm.license.must_equal "GPLv2+"
   end
 
+  it "tells which format the payload is stored as" do
+    rpm.payload_format.must_equal "cpio"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

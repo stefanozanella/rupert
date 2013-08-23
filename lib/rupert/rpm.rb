@@ -114,6 +114,13 @@ module Rupert
       @header.license
     end
 
+    # The format of package's payload.
+    #
+    # @return [String] payload format name
+    def payload_format
+      @header.payload_format
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?

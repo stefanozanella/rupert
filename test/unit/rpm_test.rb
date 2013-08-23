@@ -61,6 +61,12 @@ describe Rupert::RPM do
     rpm.license.must_equal("WTFPL")
   end
 
+  it "exposes RPM payload format name stored in the header" do
+    header.stubs(:payload_format).returns("plain")
+
+    rpm.payload_format.must_equal("plain")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

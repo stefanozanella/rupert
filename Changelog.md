@@ -6,6 +6,7 @@
   * target os name
   * target architecture
   * license name
+  * payload format
 
 ## 0.0.2
 
