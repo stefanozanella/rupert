@@ -109,6 +109,12 @@ describe Rupert::RPM do
     rpm.url.must_equal("http://example.com")
   end
 
+  it "exposes package's source RPM name stored in the header" do
+    header.stubs(:source_rpm).returns("myrpm-1.0.0-1.src.rpm")
+
+    rpm.source_rpm.must_equal("myrpm-1.0.0-1.src.rpm")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

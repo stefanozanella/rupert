@@ -176,6 +176,13 @@ module Rupert
       @header.url
     end
 
+    # Name of the source RPM associated to the binary package.
+    #
+    # @return [String] source RPM filename
+    def source_rpm
+      @header.source_rpm
+    end
+
     # @return +true+ if the package is signed, +false+ otherwise
     def signed?
       @lead.signed?

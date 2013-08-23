@@ -76,6 +76,10 @@ describe Rupert::RPM do
     rpm.url.must_equal "http://www.rpm.org/"
   end
 
+  it "reads the associated source RPM file name" do
+    rpm.source_rpm.must_equal "rpm-4.8.0-32.el6.src.rpm"
+  end
+
   it "tells the package uncompressed size (in bytes)" do
     rpm.uncompressed_size.must_equal 2031240
   end

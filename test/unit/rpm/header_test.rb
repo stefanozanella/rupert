@@ -20,6 +20,7 @@ describe Rupert::RPM::Header do
       :packager,
       :vendor,
       :url,
+      :source_rpm,
       :size,
       :basenames,
       :dirnames,

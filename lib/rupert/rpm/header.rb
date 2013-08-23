@@ -24,6 +24,7 @@ module Rupert
         :packager           => 1015,
         :vendor             => 1011,
         :url                => 1020,
+        :source_rpm         => 1044,
       }.freeze
 
       # Creates a new header.
