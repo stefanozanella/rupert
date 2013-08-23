@@ -5,75 +5,23 @@ describe Rupert::RPM::Header do
   let(:tags)   { Rupert::RPM::Header::TAGS }
   let(:header) { Rupert::RPM::Header.new index }
   
-  it "maps RPM name stored in the header" do
-    index.expects(:get).once.with(tags[:name])
+  it "correctly maps all methods to their corresponding tag in the header" do
+    [ :name,
+      :version,
+      :release,
+      :os,
+      :arch,
+      :license,
+      :payload_format,
+      :payload_compressor,
+      :size,
+      :basenames,
+      :dirnames,
+      :dirindexes,
+    ].each do |field|
+      index.expects(:get).once.with(tags[field])
 
-    header.name
-  end
-
-  it "maps RPM version stored in the header" do
-    index.expects(:get).once.with(tags[:version])
-
-    header.version
-  end
-
-  it "maps RPM release stored in the header" do
-    index.expects(:get).once.with(tags[:release])
-
-    header.release
-  end
-
-  it "maps RPM os name stored in the header" do
-    index.expects(:get).once.with(tags[:os])
-
-    header.os
-  end
-
-  it "maps RPM architecture name stored in the header" do
-    index.expects(:get).once.with(tags[:arch])
-
-    header.arch
-  end
-
-  it "maps RPM license name stored in the header" do
-    index.expects(:get).once.with(tags[:license])
-
-    header.license
-  end
-
-  it "maps RPM payload format name stored in the header" do
-    index.expects(:get).once.with(tags[:payload_format])
-
-    header.payload_format
-  end
-
-  it "maps RPM payload compressor name stored in the header" do
-    index.expects(:get).once.with(tags[:payload_compressor])
-
-    header.payload_compressor
-  end
-
-  it "maps RPM uncompressed size stored in the header" do
-    index.expects(:get).once.with(tags[:size])
-
-    header.size
-  end
-
-  it "maps RPM basenames stored in the header" do
-    index.expects(:get).once.with(tags[:basenames])
-
-    header.basenames
-  end
-
-  it "maps RPM dirnames stored in the header" do
-    index.expects(:get).once.with(tags[:dirnames])
-
-    header.dirnames
-  end
-
-  it "maps RPM dirindexes stored in the header" do
-    index.expects(:get).once.with(tags[:dirindexes])
-
-    header.dirindexes
+      header.send(field)
+    end
   end
 end
