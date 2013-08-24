@@ -76,6 +76,10 @@ describe Rupert::RPM do
     rpm.url.must_equal "http://www.rpm.org/"
   end
 
+  it "reads the group the package belongs to" do
+    rpm.group.must_equal "System Environment/Base"
+  end
+
   it "reads the associated source RPM file name" do
     rpm.source_rpm.must_equal "rpm-4.8.0-32.el6.src.rpm"
   end

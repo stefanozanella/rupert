@@ -15,6 +15,7 @@
   * vendor info
   * package URL
   * package source RPM file name
+  * package group name
 
 ## 0.0.2
 

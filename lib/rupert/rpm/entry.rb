@@ -47,7 +47,7 @@ module Rupert
       # * +String+ of arbitrary length
       # * +String+ of arbitrary length, 8-bit ASCII encoded
       # * +Array+ of +String+
-      # * +Array+ of +String+
+      # * +String+ (no I18N support for the moment, as it seems not to be used)
       #
       # *NOTE*: The store is sought to retrieve data. Do not make any
       # assumptions on IO's pointer state after method call. If you need to
@@ -77,7 +77,8 @@ module Rupert
         4 => :int32,
         6 => :string,
         7 => :binary,
-        8 => :string
+        8 => :string,
+        9 => :string,
       }
 
       # :nodoc: Reads given type of data from given store

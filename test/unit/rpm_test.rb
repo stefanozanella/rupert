@@ -115,6 +115,12 @@ describe Rupert::RPM do
     rpm.source_rpm.must_equal("myrpm-1.0.0-1.src.rpm")
   end
 
+  it "exposes package's group name stored in the header" do
+    header.stubs(:group).returns("base software")
+
+    rpm.group.must_equal("base software")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

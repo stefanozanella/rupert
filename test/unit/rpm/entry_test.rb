@@ -19,6 +19,15 @@ describe Rupert::RPM::Entry do
     end
   end
 
+  describe "fetching an internationalized string" do
+    let(:store) { io(ascii("\x00\x01Just a plain string\x00")) }
+    let(:entry) { Rupert::RPM::Entry.new(nil, 9, 2, 1) }
+
+    it "treats the string as a normal null-terminated string ignoring eventual translations" do
+      entry.resolve(store).must_equal "Just a plain string"
+    end
+  end
+
   describe "fetching an array of strings" do
     let(:store) { io(ascii("One\x00Two\x00Three")) }
     let(:entry) { Rupert::RPM::Entry.new(nil, 8, 0, 3) }

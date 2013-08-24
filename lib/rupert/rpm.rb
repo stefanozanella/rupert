@@ -176,6 +176,13 @@ module Rupert
       @header.url
     end
 
+    # The group this package belongs to.
+    #
+    # @return [String] package group, in the form +<section>/<subsection>+
+    def group
+      @header.group
+    end
+
     # Name of the source RPM associated to the binary package.
     #
     # @return [String] source RPM filename
