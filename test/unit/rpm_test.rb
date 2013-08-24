@@ -121,6 +121,12 @@ describe Rupert::RPM do
     rpm.group.must_equal("base software")
   end
 
+  it "exposes package's summary stored in the header" do
+    header.stubs(:summary).returns("silly package")
+
+    rpm.summary.must_equal("silly package")
+  end
+
   it "exposes RPM uncompressed size stored in the header" do
     header.stubs(:size).returns(1234)
 

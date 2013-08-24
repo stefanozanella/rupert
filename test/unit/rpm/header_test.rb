@@ -23,6 +23,7 @@ describe Rupert::RPM::Header do
       :source_rpm,
       :size,
       :group,
+      :summary,
       :basenames,
       :dirnames,
       :dirindexes,

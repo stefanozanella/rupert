@@ -26,6 +26,7 @@ module Rupert
         :url                => 1020,
         :source_rpm         => 1044,
         :group              => 1016,
+        :summary            => 1004,
       }.freeze
 
       # Creates a new header.

@@ -80,6 +80,10 @@ describe Rupert::RPM do
     rpm.group.must_equal "System Environment/Base"
   end
 
+  it "reads the package summary" do
+    rpm.summary.must_equal "The RPM package management system"
+  end
+
   it "reads the associated source RPM file name" do
     rpm.source_rpm.must_equal "rpm-4.8.0-32.el6.src.rpm"
   end
