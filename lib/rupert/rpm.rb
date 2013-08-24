@@ -190,6 +190,13 @@ module Rupert
       @header.summary
     end
 
+    # Package's long description.
+    #
+    # @return [String] more verbose package description
+    def description
+      @header.description
+    end
+
     # Name of the source RPM associated to the binary package.
     #
     # @return [String] source RPM filename

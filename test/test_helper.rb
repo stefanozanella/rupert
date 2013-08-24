@@ -76,3 +76,8 @@ end
 def signature_with(string)
   signature_from(string)
 end
+
+# Strip of unwanted leading spaces and terminal \n from heredoc string
+def strip_heredoc(str)
+  str.gsub(/\n$/, "").gsub(/^\s+/, "")
+end

@@ -84,6 +84,16 @@ describe Rupert::RPM do
     rpm.summary.must_equal "The RPM package management system"
   end
 
+  it "reads the package description" do
+    rpm.description.must_equal strip_heredoc(<<-desc)
+      The RPM Package Manager (RPM) is a powerful command line driven
+      package management system capable of installing, uninstalling,
+      verifying, querying, and updating software packages. Each software
+      package consists of an archive of files along with information about
+      the package like its version, a description, etc.
+    desc
+  end
+
   it "reads the associated source RPM file name" do
     rpm.source_rpm.must_equal "rpm-4.8.0-32.el6.src.rpm"
   end

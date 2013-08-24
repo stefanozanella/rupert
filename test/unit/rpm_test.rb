@@ -121,6 +121,12 @@ describe Rupert::RPM do
     rpm.group.must_equal("base software")
   end
 
+  it "exposes package's description stored in the header" do
+    header.stubs(:description).returns("a rather cryptic and short description")
+
+    rpm.description.must_equal("a rather cryptic and short description")
+  end
+
   it "exposes package's summary stored in the header" do
     header.stubs(:summary).returns("silly package")
 

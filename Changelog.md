@@ -17,6 +17,7 @@
   * package source RPM file name
   * package group name
   * package summary
+  * package description
 
 ## 0.0.2
 

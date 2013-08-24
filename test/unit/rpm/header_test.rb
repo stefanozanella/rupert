@@ -24,6 +24,7 @@ describe Rupert::RPM::Header do
       :size,
       :group,
       :summary,
+      :description,
       :basenames,
       :dirnames,
       :dirindexes,
