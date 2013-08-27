@@ -18,6 +18,7 @@
   * package group name
   * package summary
   * package description
+* More information given about installed files: file size
 
 ## 0.0.2
 

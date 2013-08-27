@@ -16,6 +16,7 @@ module Rupert
         :dirindexes         => 1116,
         :basenames          => 1117,
         :dirnames           => 1118,
+        :filesizes          => 1028,
         :payload_format     => 1124,
         :payload_compressor => 1125,
         :payload_flags      => 1126,

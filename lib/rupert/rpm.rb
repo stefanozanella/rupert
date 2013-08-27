@@ -3,6 +3,7 @@ require 'rupert/parser'
 require 'rupert/rpm/lead'
 require 'rupert/rpm/signature'
 require 'rupert/rpm/header'
+require 'rupert/rpm/file'
 
 require 'base64'
 
@@ -17,7 +18,7 @@ module Rupert
         raise NotAnRPM, 
           "File #{filename} isn't a valid RPM" unless rpm?(filename)
 
-        raw_io = File.open(filename, 'r')
+        raw_io = ::File.open(filename, 'r')
         rpm = Parser.new(raw_io).parse
         raw_io.close
 
@@ -29,7 +30,7 @@ module Rupert
       # @param filename [String] filename to inspect
       # @return +true+ if file starts with the correct magic header
       def rpm?(filename)
-        Lead.new(File.open(filename, 'r')).rpm?
+        Lead.new(::File.open(filename, 'r')).rpm?
       end
     end
 
@@ -250,11 +251,13 @@ module Rupert
     #
     # @return [Array] array of +String+, with entries corresponding to 
     #         absolute filenames
-    def filenames
+    def files
       @header.dirindexes.map { |idx|
         @header.dirnames[idx]
       }.zip(@header.basenames).map { |dir, name|
-        File.join(dir, name)
+        ::File.join(dir, name)
+      }.zip(@header.filesizes).map { |path, size|
+        Rupert::RPM::File.new(path, size)
       }
     end
   end

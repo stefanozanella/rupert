@@ -77,6 +77,12 @@ def signature_with(string)
   signature_from(string)
 end
 
+# Helper that builds a RPM file object from its fields. Use it to improve test
+# readability.
+def file(path, size)
+  Rupert::RPM::File.new(path, size)
+end
+
 # Strip of unwanted leading spaces and terminal \n from heredoc string
 def strip_heredoc(str)
   str.gsub(/\n$/, "").gsub(/^\s+/, "")

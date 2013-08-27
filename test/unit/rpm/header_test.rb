@@ -28,6 +28,7 @@ describe Rupert::RPM::Header do
       :basenames,
       :dirnames,
       :dirindexes,
+      :filesizes,
     ].each do |field|
       index.expects(:get).once.with(tags[field])
 

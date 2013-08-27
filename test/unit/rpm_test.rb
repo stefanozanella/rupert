@@ -141,9 +141,14 @@ describe Rupert::RPM do
 
   it "exposes RPM basenames stored in the header" do
     header.stubs(:basenames).returns(["file1", "file1", "file2"])
+    header.stubs(:filesizes).returns([1234, 4567, 6789])
     header.stubs(:dirnames).returns(["/dir1", "/dir2"])
     header.stubs(:dirindexes).returns([0, 1, 0])
 
-    rpm.filenames.must_equal [ "/dir1/file1", "/dir2/file1", "/dir1/file2" ]
+    rpm.files.must_equal [ 
+      Rupert::RPM::File.new("/dir1/file1", 1234),
+      Rupert::RPM::File.new("/dir2/file1", 4567),
+      Rupert::RPM::File.new("/dir1/file2", 6789)
+    ]
   end
 end

@@ -102,12 +102,12 @@ describe Rupert::RPM do
     rpm.uncompressed_size.must_equal 2031240
   end
 
-  it "tells the full name of the files contained in the package" do
-    rpm.filenames.length.must_equal 0x8c
+  it "gives full info about the files contained in the package" do
+    rpm.files.length.must_equal 140
 
-    rpm.filenames.must_include "/bin/rpm"
-    rpm.filenames.must_include "/usr/share/doc/rpm-4.8.0/ChangeLog.bz2"
-    rpm.filenames.must_include "/var/lib/rpm/__db.009"
+    rpm.files.must_include file("/bin/rpm", 20392)
+    rpm.files.must_include file("/usr/share/doc/rpm-4.8.0/ChangeLog.bz2", 491643)
+    rpm.files.must_include file("/var/lib/rpm/__db.009", 0)
   end
 
   it "knows which version of RPM the file is" do
